@@ -1,0 +1,1577 @@
+```html
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>RTYEM SUNO BOY — Music • AI • Python</title>
+
+    <meta
+        name="description"
+        content="RTYEM SUNO BOY — 8-річний музичний ІІ-продюсер та Python розробник."
+    >
+
+    <style>
+        /* =========================================================
+           ОСНОВНІ НАЛАШТУВАННЯ
+        ========================================================= */
+
+        @import url(
+            'https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@400;500;600;700&display=swap'
+        );
+
+        :root {
+            --black: #020307;
+            --black-2: #070912;
+            --panel: rgba(8, 12, 25, 0.88);
+
+            --cyan: #00f2fe;
+            --cyan-dark: #00a9c0;
+
+            --pink: #ff007f;
+            --pink-light: #ff3ba7;
+
+            --red: #ff1744;
+            --white: #f5f8ff;
+            --gray: #8994aa;
+
+            --border: rgba(0, 242, 254, 0.28);
+
+            --shadow-cyan:
+                0 0 8px rgba(0, 242, 254, .65),
+                0 0 25px rgba(0, 242, 254, .25);
+
+            --shadow-pink:
+                0 0 8px rgba(255, 0, 127, .65),
+                0 0 25px rgba(255, 0, 127, .25);
+        }
+
+
+        /* =========================================================
+           RESET
+        ========================================================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+
+        body {
+            min-height: 100vh;
+
+            color: var(--white);
+
+            font-family: "Rajdhani", sans-serif;
+
+            background:
+                radial-gradient(
+                    circle at 15% 10%,
+                    rgba(0, 242, 254, .09),
+                    transparent 30%
+                ),
+                radial-gradient(
+                    circle at 85% 25%,
+                    rgba(255, 0, 127, .08),
+                    transparent 30%
+                ),
+                radial-gradient(
+                    circle at 50% 100%,
+                    rgba(0, 242, 254, .05),
+                    transparent 35%
+                ),
+                var(--black);
+
+            overflow-x: hidden;
+        }
+
+
+        /* =========================================================
+           ФУТУРИСТИЧНА СІТКА
+        ========================================================= */
+
+        body::before {
+            content: "";
+
+            position: fixed;
+            inset: 0;
+
+            pointer-events: none;
+
+            opacity: .14;
+
+            background-image:
+                linear-gradient(
+                    rgba(0, 242, 254, .15) 1px,
+                    transparent 1px
+                ),
+                linear-gradient(
+                    90deg,
+                    rgba(255, 0, 127, .12) 1px,
+                    transparent 1px
+                );
+
+            background-size: 55px 55px;
+
+            mask-image:
+                linear-gradient(
+                    to bottom,
+                    black 0%,
+                    transparent 90%
+                );
+
+            z-index: 0;
+        }
+
+
+        /* =========================================================
+           АНІМОВАНА НЕОНОВА ЛІНІЯ
+        ========================================================= */
+
+        body::after {
+            content: "";
+
+            position: fixed;
+
+            top: 0;
+            left: -40%;
+
+            width: 35%;
+            height: 2px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    transparent,
+                    var(--cyan),
+                    var(--pink),
+                    transparent
+                );
+
+            box-shadow:
+                0 0 12px var(--cyan),
+                0 0 25px var(--pink);
+
+            animation: scanner 6s linear infinite;
+
+            z-index: 999;
+
+            pointer-events: none;
+        }
+
+
+        @keyframes scanner {
+            0% {
+                left: -40%;
+            }
+
+            100% {
+                left: 120%;
+            }
+        }
+
+
+        /* =========================================================
+           ЗАГАЛЬНІ КЛАСИ
+        ========================================================= */
+
+        .container {
+            width: min(1150px, 92%);
+            margin: auto;
+
+            position: relative;
+            z-index: 2;
+        }
+
+
+        section {
+            padding: 100px 0;
+        }
+
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+
+        .section-title .small-title {
+            display: inline-block;
+
+            color: var(--cyan);
+
+            font-family: "Orbitron", sans-serif;
+
+            font-size: 12px;
+
+            letter-spacing: 4px;
+
+            margin-bottom: 15px;
+        }
+
+
+        .section-title h2 {
+            font-family: "Orbitron", sans-serif;
+
+            font-size: clamp(28px, 5vw, 48px);
+
+            letter-spacing: 2px;
+
+            color: white;
+
+            text-shadow:
+                0 0 10px rgba(0, 242, 254, .5),
+                0 0 30px rgba(255, 0, 127, .2);
+        }
+
+
+        .section-title p {
+            color: var(--gray);
+
+            font-size: 18px;
+
+            margin-top: 12px;
+        }
+
+
+        /* =========================================================
+           HERO
+        ========================================================= */
+
+        .hero {
+            min-height: 100vh;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            text-align: center;
+
+            position: relative;
+
+            padding: 60px 0;
+        }
+
+
+        .hero-content {
+            animation: heroIn 1.2s ease both;
+        }
+
+
+        @keyframes heroIn {
+            from {
+                opacity: 0;
+                transform: translateY(40px) scale(.96);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+
+        .online {
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            padding: 9px 18px;
+
+            border: 1px solid rgba(0, 242, 254, .35);
+
+            border-radius: 50px;
+
+            background:
+                rgba(0, 242, 254, .04);
+
+            color: var(--cyan);
+
+            font-family: "Orbitron", sans-serif;
+
+            font-size: 12px;
+
+            letter-spacing: 2px;
+
+            margin-bottom: 30px;
+        }
+
+
+        .online-dot {
+            width: 8px;
+            height: 8px;
+
+            border-radius: 50%;
+
+            background: #00ff9d;
+
+            box-shadow:
+                0 0 8px #00ff9d,
+                0 0 18px #00ff9d;
+
+            animation: onlinePulse 1.3s infinite;
+        }
+
+
+        @keyframes onlinePulse {
+            50% {
+                opacity: .35;
+                transform: scale(.7);
+            }
+        }
+
+
+        .logo {
+            font-family: "Orbitron", sans-serif;
+
+            font-size: clamp(42px, 10vw, 105px);
+
+            font-weight: 900;
+
+            line-height: .95;
+
+            letter-spacing: 4px;
+
+            color: #fff;
+
+            text-transform: uppercase;
+
+            text-shadow:
+                0 0 5px #fff,
+                0 0 12px var(--cyan),
+                0 0 30px var(--cyan),
+                0 0 65px var(--pink);
+
+            animation: logoGlow 2.5s ease-in-out infinite alternate;
+        }
+
+
+        @keyframes logoGlow {
+            from {
+                filter: brightness(.95);
+            }
+
+            to {
+                filter: brightness(1.3);
+            }
+        }
+
+
+        .hero-subtitle {
+            margin-top: 30px;
+
+            font-size: clamp(20px, 3vw, 30px);
+
+            color: var(--white);
+
+            font-weight: 600;
+        }
+
+
+        .hero-subtitle span {
+            color: var(--cyan);
+
+            text-shadow:
+                0 0 12px var(--cyan);
+        }
+
+
+        .hero-description {
+            max-width: 700px;
+
+            margin: 20px auto 0;
+
+            color: var(--gray);
+
+            font-size: 18px;
+
+            line-height: 1.6;
+        }
+
+
+        .hero-line {
+            width: min(600px, 80%);
+
+            height: 1px;
+
+            margin: 35px auto;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    transparent,
+                    var(--cyan),
+                    var(--pink),
+                    transparent
+                );
+
+            box-shadow:
+                0 0 12px var(--cyan);
+        }
+
+
+        /* =========================================================
+           YOUTUBE
+        ========================================================= */
+
+        .youtube-area {
+            text-align: center;
+        }
+
+
+        .youtube-button {
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 15px;
+
+            min-width: 300px;
+
+            padding: 20px 38px;
+
+            border-radius: 12px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #ff1744,
+                    #c40035
+                );
+
+            border: 1px solid #ff6682;
+
+            color: white;
+
+            text-decoration: none;
+
+            font-family: "Orbitron", sans-serif;
+
+            font-size: 18px;
+
+            font-weight: 700;
+
+            letter-spacing: 1px;
+
+            box-shadow:
+                0 0 10px rgba(255, 23, 68, .8),
+                0 0 30px rgba(255, 23, 68, .4);
+
+            transition:
+                transform .25s,
+                box-shadow .25s;
+        }
+
+
+        .youtube-button:hover {
+            transform:
+                translateY(-6px)
+                scale(1.03);
+
+            box-shadow:
+                0 0 15px rgba(255, 23, 68, 1),
+                0 0 45px rgba(255, 23, 68, .65),
+                0 0 80px rgba(255, 23, 68, .25);
+        }
+
+
+        .youtube-icon {
+            font-size: 30px;
+        }
+
+
+        /* =========================================================
+           GOOGLE AI OVERVIEW
+        ========================================================= */
+
+        .google-card {
+            position: relative;
+
+            padding: 40px;
+
+            border: 1px solid var(--border);
+
+            border-radius: 20px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(0, 242, 254, .06),
+                    rgba(255, 0, 127, .06)
+                );
+
+            box-shadow:
+                inset 0 0 40px rgba(0, 242, 254, .025),
+                0 0 30px rgba(0, 242, 254, .05);
+
+            overflow: hidden;
+        }
+
+
+        .google-card::before {
+            content: "";
+
+            position: absolute;
+
+            top: 0;
+            left: 0;
+
+            width: 100%;
+            height: 3px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    var(--cyan),
+                    var(--pink)
+                );
+
+            box-shadow:
+                0 0 15px var(--cyan);
+        }
+
+
+        .google-label {
+            display: inline-block;
+
+            margin-bottom: 25px;
+
+            padding: 7px 13px;
+
+            border: 1px solid rgba(0, 242, 254, .25);
+
+            border-radius: 6px;
+
+            color: var(--cyan);
+
+            font-family: "Orbitron", sans-serif;
+
+            font-size: 12px;
+
+            letter-spacing: 2px;
+        }
+
+
+        .google-card blockquote {
+            color: #dce3f5;
+
+            font-size: clamp(19px, 2.4vw, 25px);
+
+            line-height: 1.65;
+
+            font-weight: 500;
+
+            padding-left: 25px;
+
+            border-left: 3px solid var(--pink);
+
+            text-shadow:
+                0 0 10px rgba(255,255,255,.04);
+        }
+
+
+        .google-card .quote-mark {
+            color: var(--pink);
+
+            font-family: Georgia, serif;
+
+            font-size: 50px;
+
+            line-height: 0;
+        }
+
+
+        /* =========================================================
+           МУЗИЧНИЙ АЛЬБОМ
+        ========================================================= */
+
+        .tracks {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 25px;
+        }
+
+
+        .track {
+            position: relative;
+
+            min-height: 260px;
+
+            padding: 30px;
+
+            border-radius: 18px;
+
+            border: 1px solid
+                rgba(0, 242, 254, .25);
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(8, 15, 30, .95),
+                    rgba(18, 8, 24, .95)
+                );
+
+            overflow: hidden;
+
+            transition:
+                transform .35s,
+                border-color .35s,
+                box-shadow .35s;
+        }
+
+
+        .track:hover {
+            transform:
+                translateY(-8px);
+
+            border-color:
+                var(--cyan);
+
+            box-shadow:
+                0 0 25px rgba(0, 242, 254, .18),
+                inset 0 0 30px rgba(255, 0, 127, .04);
+        }
+
+
+        .track::after {
+            content: "";
+
+            position: absolute;
+
+            right: -50px;
+            bottom: -50px;
+
+            width: 150px;
+            height: 150px;
+
+            border:
+                1px solid var(--pink);
+
+            border-radius: 50%;
+
+            box-shadow:
+                0 0 25px var(--pink);
+
+            opacity: .25;
+        }
+
+
+        .track-number {
+            font-family: "Orbitron", sans-serif;
+
+            font-size: 13px;
+
+            color: var(--cyan);
+
+            letter-spacing: 3px;
+
+            margin-bottom: 35px;
+        }
+
+
+        .track h3 {
+            font-family: "Orbitron", sans-serif;
+
+            font-size: clamp(21px, 3vw, 28px);
+
+            margin-bottom: 15px;
+
+            color: white;
+        }
+
+
+        .track p {
+            color: var(--gray);
+
+            font-size: 17px;
+
+            line-height: 1.5;
+        }
+
+
+        .track-badge {
+            display: inline-block;
+
+            margin-top: 25px;
+
+            padding: 7px 12px;
+
+            border-radius: 5px;
+
+            background:
+                rgba(255, 0, 127, .08);
+
+            border:
+                1px solid rgba(255, 0, 127, .3);
+
+            color:
+                var(--pink-light);
+
+            font-size: 13px;
+        }
+
+
+        /* =========================================================
+           MINECRAFT + AI
+        ========================================================= */
+
+        .minecraft {
+            display: grid;
+
+            grid-template-columns:
+                180px 1fr;
+
+            gap: 40px;
+
+            align-items: center;
+
+            padding: 45px;
+
+            border-radius: 22px;
+
+            border:
+                1px solid rgba(255, 0, 127, .3);
+
+            background:
+                linear-gradient(
+                    120deg,
+                    rgba(255, 0, 127, .07),
+                    rgba(0, 242, 254, .04)
+                );
+
+            box-shadow:
+                0 0 40px rgba(255, 0, 127, .06);
+        }
+
+
+        .minecraft-icon {
+            width: 150px;
+            height: 150px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            font-size: 80px;
+
+            border-radius: 20px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #172817,
+                    #071007
+                );
+
+            border:
+                2px solid #42ff42;
+
+            box-shadow:
+                0 0 15px rgba(66,255,66,.5),
+                inset 0 0 25px rgba(66,255,66,.08);
+
+            transform:
+                perspective(500px)
+                rotateY(-8deg);
+
+            animation:
+                minecraftFloat 3s ease-in-out infinite;
+        }
+
+
+        @keyframes minecraftFloat {
+            50% {
+                transform:
+                    perspective(500px)
+                    rotateY(8deg)
+                    translateY(-8px);
+            }
+        }
+
+
+        .minecraft h3 {
+            font-family: "Orbitron", sans-serif;
+
+            color: var(--cyan);
+
+            font-size:
+                clamp(24px, 4vw, 36px);
+
+            margin-bottom: 18px;
+
+            text-shadow:
+                0 0 12px var(--cyan);
+        }
+
+
+        .minecraft p {
+            color: #c4ccdc;
+
+            font-size: 18px;
+
+            line-height: 1.65;
+        }
+
+
+        .minecraft-tag {
+            display: inline-block;
+
+            margin-top: 20px;
+
+            color: var(--pink);
+
+            border: 1px solid
+                rgba(255,0,127,.35);
+
+            padding: 8px 13px;
+
+            border-radius: 5px;
+
+            font-size: 13px;
+
+            letter-spacing: 1px;
+        }
+
+
+        /* =========================================================
+           AI CHAT
+        ========================================================= */
+
+        .chat-container {
+            max-width: 850px;
+
+            margin: auto;
+
+            padding: 4px;
+
+            border-radius: 22px;
+
+            background:
+                linear-gradient(
+                    120deg,
+                    var(--cyan),
+                    var(--pink),
+                    var(--cyan)
+                );
+
+            background-size:
+                300% 300%;
+
+            animation:
+                chatBorder 5s ease infinite;
+        }
+
+
+        @keyframes chatBorder {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+
+        .chat {
+            border-radius: 19px;
+
+            background:
+                #050711;
+
+            overflow: hidden;
+        }
+
+
+        .chat-top {
+            padding: 20px 25px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            border-bottom:
+                1px solid rgba(0,242,254,.12);
+        }
+
+
+        .chat-title {
+            font-family: "Orbitron", sans-serif;
+
+            color: var(--cyan);
+
+            text-shadow:
+                0 0 12px var(--cyan);
+
+            font-size: 16px;
+        }
+
+
+        .chat-online {
+            color: #00ff9d;
+
+            font-size: 12px;
+
+            letter-spacing: 1px;
+        }
+
+
+        #chatMessages {
+            height: 390px;
+
+            overflow-y: auto;
+
+            padding: 25px;
+        }
+
+
+        #chatMessages::-webkit-scrollbar {
+            width: 5px;
+        }
+
+
+        #chatMessages::-webkit-scrollbar-thumb {
+            background:
+                linear-gradient(
+                    var(--cyan),
+                    var(--pink)
+                );
+
+            border-radius: 5px;
+        }
+
+
+        .message {
+            max-width: 80%;
+
+            padding: 14px 17px;
+
+            margin-bottom: 14px;
+
+            border-radius: 12px;
+
+            font-size: 16px;
+
+            line-height: 1.5;
+
+            animation:
+                messageIn .3s ease;
+        }
+
+
+        @keyframes messageIn {
+            from {
+                opacity: 0;
+                transform: translateY(8px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+
+        .message.ai {
+            margin-right: auto;
+
+            background:
+                rgba(0,242,254,.07);
+
+            border-left:
+                3px solid var(--cyan);
+
+            box-shadow:
+                0 0 15px rgba(0,242,254,.04);
+        }
+
+
+        .message.user {
+            margin-left: auto;
+
+            background:
+                rgba(255,0,127,.08);
+
+            border-right:
+                3px solid var(--pink);
+
+            text-align: right;
+        }
+
+
+        .chat-input-area {
+            display: flex;
+
+            gap: 10px;
+
+            padding: 20px;
+
+            border-top:
+                1px solid rgba(0,242,254,.12);
+
+            background:
+                rgba(0,0,0,.2);
+        }
+
+
+        #question {
+            flex: 1;
+
+            min-width: 0;
+
+            padding: 16px 18px;
+
+            border-radius: 10px;
+
+            border:
+                1px solid rgba(0,242,254,.25);
+
+            outline: none;
+
+            background:
+                #090d19;
+
+            color: white;
+
+            font-family:
+                "Rajdhani",
+                sans-serif;
+
+            font-size: 17px;
+
+            transition: .25s;
+        }
+
+
+        #question:focus {
+            border-color:
+                var(--cyan);
+
+            box-shadow:
+                0 0 15px
+                rgba(0,242,254,.15);
+        }
+
+
+        #question::placeholder {
+            color: #626d84;
+        }
+
+
+        #askButton {
+            padding: 0 25px;
+
+            border: 1px solid
+                rgba(255,255,255,.15);
+
+            border-radius: 10px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--cyan-dark),
+                    #0870a0
+                );
+
+            color: white;
+
+            font-family:
+                "Orbitron",
+                sans-serif;
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            box-shadow:
+                var(--shadow-cyan);
+
+            transition:
+                transform .2s,
+                box-shadow .2s;
+        }
+
+
+        #askButton:hover {
+            transform:
+                translateY(-2px);
+
+            box-shadow:
+                0 0 10px var(--cyan),
+                0 0 35px rgba(0,242,254,.5);
+        }
+
+
+        #askButton:disabled {
+            opacity: .5;
+
+            cursor: wait;
+
+            transform: none;
+        }
+
+
+        /* =========================================================
+           FOOTER
+        ========================================================= */
+
+        footer {
+            padding: 50px 0;
+
+            text-align: center;
+
+            border-top:
+                1px solid rgba(0,242,254,.1);
+
+            color: #5e687d;
+        }
+
+
+        footer strong {
+            color: var(--cyan);
+
+            text-shadow:
+                0 0 8px var(--cyan);
+        }
+
+
+        /* =========================================================
+           АДАПТИВНІСТЬ
+        ========================================================= */
+
+        @media (max-width: 750px) {
+
+            section {
+                padding: 70px 0;
+            }
+
+
+            .tracks {
+                grid-template-columns: 1fr;
+            }
+
+
+            .minecraft {
+                grid-template-columns: 1fr;
+
+                text-align: center;
+
+                padding: 30px;
+            }
+
+
+            .minecraft-icon {
+                margin: auto;
+            }
+
+
+            .google-card {
+                padding: 25px;
+            }
+
+
+            .chat-input-area {
+                flex-direction: column;
+            }
+
+
+            #askButton {
+                min-height: 50px;
+            }
+
+
+            .youtube-button {
+                min-width: 0;
+
+                width: 100%;
+            }
+        }
+
+
+        @media (max-width: 450px) {
+
+            .logo {
+                letter-spacing: 1px;
+            }
+
+
+            .hero-subtitle {
+                font-size: 19px;
+            }
+
+
+            #chatMessages {
+                height: 330px;
+
+                padding: 17px;
+            }
+
+
+            .message {
+                max-width: 92%;
+            }
+        }
+    </style>
+</head>
+
+
+<body>
+
+
+    <!-- =========================================================
+         HERO
+    ========================================================== -->
+
+    <header class="hero">
+
+        <div class="container hero-content">
+
+            <div class="online">
+                <span class="online-dot"></span>
+                СИСТЕМА ОНЛАЙН
+            </div>
+
+
+            <h1 class="logo">
+                RTYEM<br>
+                SUNO BOY
+            </h1>
+
+
+            <div class="hero-subtitle">
+                <span>8-річний</span>
+                музичний ІІ-продюсер
+                та Python розробник
+            </div>
+
+
+            <p class="hero-description">
+                Створюю музику за допомогою штучного інтелекту,
+                вивчаю Python та розробляю власні цифрові проєкти.
+                Мій світ — це музика, код та технології.
+            </p>
+
+
+            <div class="hero-line"></div>
+
+        </div>
+
+    </header>
+
+
+
+    <main>
+
+
+        <!-- =====================================================
+             YOUTUBE
+        ====================================================== -->
+
+        <section>
+
+            <div class="container youtube-area">
+
+                <div class="section-title">
+
+                    <span class="small-title">
+                        OFFICIAL CHANNEL
+                    </span>
+
+                    <h2>
+                        МОЯ МУЗИКА
+                    </h2>
+
+                    <p>
+                        Слухай треки та стеж за новими релізами
+                    </p>
+
+                </div>
+
+
+                <a
+                    class="youtube-button"
+                    href="https://www.youtube.com/@RtyemSunoboy"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+
+                    <span class="youtube-icon">
+                        ▶
+                    </span>
+
+                    ВІДКРИТИ YOUTUBE
+
+                </a>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             GOOGLE AI OVERVIEW
+        ====================================================== -->
+
+        <section>
+
+            <div class="container">
+
+                <div class="section-title">
+
+                    <span class="small-title">
+                        GOOGLE AI OVERVIEW
+                    </span>
+
+                    <h2>
+                        ОГЛЯД ВІД ШІ
+                    </h2>
+
+                    <p>
+                        Інформація про канал
+                    </p>
+
+                </div>
+
+
+                <div class="google-card">
+
+                    <div class="google-label">
+                        ОФІЦІЙНА ВІДПОВІДЬ ПОШУКОВИКА
+                    </div>
+
+
+                    <blockquote>
+
+                        <span class="quote-mark">“</span>
+
+                        «Rtyem Suno boy» — це невеликий YouTube-канал (@RtyemSunoboy) із кількома відео та мінімальною кількістю підписників, пов'язаний із музичною нейромережею Suno.
+Сама платформа Suno дозволяє безкоштовно створювати оригінальні пісні та треки за допомогою штучного інтелекту: достатньо просто ввести текстовий опис бажаного стилю та теми.
+
+                        <span class="quote-mark">”</span>
+
+                    </blockquote>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             МУЗИЧНИЙ АЛЬБОМ
+        ====================================================== -->
+
+        <section>
+
+            <div class="container">
+
+                <div class="section-title">
+
+                    <span class="small-title">
+                        MUSIC DATABASE
+                    </span>
+
+                    <h2>
+                        МУЗИЧНИЙ АЛЬБОМ
+                    </h2>
+
+                    <p>
+                        Треки, створені у світі музичного ШІ
+                    </p>
+
+                </div>
+
+
+                <div class="tracks">
+
+
+                    <!-- ТРЕК 1 -->
+
+                    <article class="track">
+
+                        <div class="track-number">
+                            TRACK // 001
+                        </div>
+
+                        <h3>
+                            Чарівна гітара
+                        </h3>
+
+                        <p>
+                            Найпопулярніший трек музичного
+                            проєкту з атмосферним звучанням
+                            та чарівною гітарою.
+                        </p>
+
+                        <div class="track-badge">
+                            Понад 100 переглядів!
+                            Самий популярний хіт
+                        </div>
+
+                    </article>
+
+
+                    <!-- ТРЕК 2 -->
+
+                    <article class="track">
+
+                        <div class="track-number">
+                            TRACK // 002
+                        </div>
+
+                        <h3>
+                            Шлях до Топу
+                        </h3>
+
+                        <p>
+                            Музична історія про мрію,
+                            наполегливість та шлях
+                            до великої мети.
+                        </p>
+
+                        <div class="track-badge">
+                            Пісня-Мрія,
+                            100% лайків без дизлайків!
+                        </div>
+
+                    </article>
+
+
+                    <!-- ТРЕК 3 -->
+
+                    <article class="track">
+
+                        <div class="track-number">
+                            TRACK // 003
+                        </div>
+
+                        <h3>
+                            Баг у системі
+                        </h3>
+
+                        <p>
+                            Енергійний цифровий трек
+                            із програмістською атмосферою
+                            та потужним репом.
+                        </p>
+
+                        <div class="track-badge">
+                            Потужний реп про червоний екран
+                        </div>
+
+                    </article>
+
+
+                    <!-- ТРЕК 4 -->
+
+                    <article class="track">
+
+                        <div class="track-number">
+                            TRACK // 004
+                        </div>
+
+                        <h3>
+                            Герої ЗСУ: Наша Сила
+                        </h3>
+
+                        <p>
+                            Патріотичний музичний трек
+                            про силу, мужність та героїзм.
+                        </p>
+
+                        <div class="track-badge">
+                            Патріотичний рок-хіт
+                        </div>
+
+                    </article>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             MINECRAFT AI
+        ====================================================== -->
+
+        <section>
+
+            <div class="container">
+
+                <div class="section-title">
+
+                    <span class="small-title">
+                     
+
+
+        <!-- =====================================================
+             AI CHAT
+        ====================================================== -->
+
+        <section>
+
+            <div class="container">
+
+                <div class="section-title">
+
+                    <span class="small-title">
+                        
+
+
+
+
+
+            
+
+    <!-- =========================================================
+         FOOTER
+    ========================================================== -->
+
+    <footer>
+
+        <div class="container">
+
+            <p>
+                © 2026
+                <strong>RTYEM SUNO BOY</strong>
+                — Музика • Python • ШІ
+            </p>
+
+        </div>
+
+    </footer>
+
+
+
+    
